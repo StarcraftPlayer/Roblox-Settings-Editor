@@ -94,6 +94,7 @@
                         x:Name="BrowseButton"
                         Grid.Column="1"
                         Content="Browse"
+                        Click="BrowseButton_Click"
                         Height="40"/>
                     </Grid>
                 </StackPanel>
@@ -184,6 +185,7 @@
                     Content="Set Settings"
                     Height="40"
                     FontSize="14"
+                    Click="SettingsButtonClicked"
                     FontWeight="SemiBold"/>
                     <TextBlock
                     Foreground="{StaticResource TertiaryBrush}"

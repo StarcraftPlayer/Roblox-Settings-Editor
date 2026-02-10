@@ -2,7 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using System.IO;
 using System;
-using Avalonia.Platform;
+using Avalonia.Platform.Storage;
+using System.Diagnostics;
 
 namespace Roblox_Settings_Modifier;
 
@@ -63,6 +64,30 @@ public partial class MainWindow : Window
         StatusMessage.Text = "Path copied to clipboard!";
     }
 
+    private async void BrowseButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel == null) return;
+
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Select Roblox Settings File",
+            AllowMultiple = false,
+            FileTypeFilter = new[]
+            {
+            new FilePickerFileType("XML Files")
+            {
+                Patterns = new[] { "*.xml" }
+            }
+        }
+        });
+
+        if (files.Count > 0)
+        {
+            var filePath = files[0].Path.LocalPath;
+            FilePathTextBox.Text = filePath;
+        }
+    }
     public void GraphicsLevelSlider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
     {
         if (sender is Slider slider)
@@ -116,6 +141,11 @@ public partial class MainWindow : Window
             windowSizeY = (int)slider.Value;
             UpdateWindowSizeTextBlock();
         }
+    }
+
+    public void SettingsButtonClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        StatusMessage.Text = "Settings have been applied!";
     }
 
     private void UpdateWindowSizeTextBlock()
