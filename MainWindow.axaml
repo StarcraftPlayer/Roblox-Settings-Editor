@@ -6,7 +6,7 @@
         Icon="avares://Roblox-Settings-Modifier/Assets/Icons/App_Icon.png"
         x:Class="Roblox_Settings_Modifier.MainWindow"
         Title="Roblox Settings Editor by Ybg"
-        Width="300" Height="655"
+        Width="300" Height="675"
         CanResize="False"
         Background="Transparent"
         ExtendClientAreaToDecorationsHint="True"

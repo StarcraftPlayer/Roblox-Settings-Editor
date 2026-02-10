@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/b/Documents/Programming/Roblox-Settings-Modifier/Roblox-Settings-Modifier.csproj": {}
+    "C:\\Users\\B\\Documents\\Programming\\Roblox-Settings-Modifier\\Roblox-Settings-Modifier.csproj": {}
   },
   "projects": {
-    "/Users/b/Documents/Programming/Roblox-Settings-Modifier/Roblox-Settings-Modifier.csproj": {
+    "C:\\Users\\B\\Documents\\Programming\\Roblox-Settings-Modifier\\Roblox-Settings-Modifier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/b/Documents/Programming/Roblox-Settings-Modifier/Roblox-Settings-Modifier.csproj",
+        "projectUniqueName": "C:\\Users\\B\\Documents\\Programming\\Roblox-Settings-Modifier\\Roblox-Settings-Modifier.csproj",
         "projectName": "Roblox-Settings-Modifier",
-        "projectPath": "/Users/b/Documents/Programming/Roblox-Settings-Modifier/Roblox-Settings-Modifier.csproj",
-        "packagesPath": "/Users/b/.nuget/packages/",
-        "outputPath": "/Users/b/Documents/Programming/Roblox-Settings-Modifier/obj/",
+        "projectPath": "C:\\Users\\B\\Documents\\Programming\\Roblox-Settings-Modifier\\Roblox-Settings-Modifier.csproj",
+        "packagesPath": "C:\\Users\\B\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\B\\Documents\\Programming\\Roblox-Settings-Modifier\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/b/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\B\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -81,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
