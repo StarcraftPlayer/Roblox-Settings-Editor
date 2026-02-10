@@ -3,18 +3,19 @@ using Avalonia.Media;
 using System.IO;
 using System;
 using Avalonia.Platform.Storage;
-using System.Diagnostics;
 
 namespace Roblox_Settings_Modifier;
 
 public partial class MainWindow : Window
 {
+    AppSettings settings = new AppSettings();
     const int minWindowSizeX = 640;
     const int minWindowSizeY = 360;
     string selectableFilePath = "C:\\Users\\[Your User]\\AppData\\Local\\Roblox\\GlobalBasicSettings_13.xml";
 
     public MainWindow()
     {
+        settings.LoadSettings();
         InitializeComponent();
         if (OperatingSystem.IsWindows())
         {
@@ -40,13 +41,29 @@ public partial class MainWindow : Window
         WindowSizeXSlider.Maximum = Screens.Primary.Bounds.Width;
         WindowSizeYSlider.Maximum = Screens.Primary.Bounds.Height;
     }
+    private bool ApplySettings()
+    {
+        // Validate file path
+        if (string.IsNullOrEmpty(FilePathTextBox.Text))
+        {
+            StatusMessage.Text = "Please select a settings file first!";
+            return false;
+        }
 
-    public int FPS = 60;
-    public int GraphicsLevel = 10;
-    public int VolumeLevel = 10;
-    public bool Fullscreen = false;
-    public int windowSizeX = minWindowSizeX;
-    public int windowSizeY = minWindowSizeY;
+        if (!File.Exists(FilePathTextBox.Text))
+        {
+            StatusMessage.Text = "File not found!";
+            return false;
+        }
+
+        // Validate FPS input
+        if (settings.FPS < -1)
+        {
+            StatusMessage.Text = "Invalid FPS value!";
+            return false;
+        }
+        return false;
+    }
 
     public void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
@@ -88,12 +105,24 @@ public partial class MainWindow : Window
             FilePathTextBox.Text = filePath;
         }
     }
+
+    public void FpsInputTextChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e)
+    {
+        if (sender is TextBox textBox)
+        {
+            if (int.TryParse(textBox.Text, out int fps))
+            {
+                settings.FPS = fps;
+            }
+        }
+    }
+
     public void GraphicsLevelSlider_ValueChanged(object? sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
     {
         if (sender is Slider slider)
         {
-            GraphicsLevel = (int)slider.Value;
-            GraphicsLevelTextBlock.Text = $"Graphics Level: {GraphicsLevel}";
+            settings.GraphicsLevel = (int)slider.Value;
+            GraphicsLevelTextBlock.Text = $"Graphics Level: {settings.GraphicsLevel}";
 
         }
     }
@@ -102,8 +131,8 @@ public partial class MainWindow : Window
     {
         if (sender is Slider slider)
         {
-            VolumeLevel = (int)slider.Value;
-            VolumeLevelTextBlock.Text = $"Volume Level: {VolumeLevel}";
+            settings.VolumeLevel = (int)slider.Value;
+            VolumeLevelTextBlock.Text = $"Volume Level: {settings.VolumeLevel}";
         }
     }
 
@@ -111,8 +140,8 @@ public partial class MainWindow : Window
     {
         if (sender is Button button)
         {
-            Fullscreen = !Fullscreen;
-            if (Fullscreen)
+            settings.Fullscreen = !settings.Fullscreen;
+            if (settings.Fullscreen)
             {
                 button.Content = "Fullscreen: On";
                 button.Background = Brushes.SeaGreen;
@@ -129,7 +158,7 @@ public partial class MainWindow : Window
     {
         if (sender is Slider slider)
         {
-            windowSizeX = (int)slider.Value;
+            settings.windowSizeX = (int)slider.Value;
             UpdateWindowSizeTextBlock();
         }
     }
@@ -138,18 +167,21 @@ public partial class MainWindow : Window
     {
         if (sender is Slider slider)
         {
-            windowSizeY = (int)slider.Value;
+            settings.windowSizeY = (int)slider.Value;
             UpdateWindowSizeTextBlock();
         }
     }
 
     public void SettingsButtonClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        StatusMessage.Text = "Settings have been applied!";
+        if (ApplySettings() && settings.SaveSettings())
+        {
+            StatusMessage.Text = "Settings have been applied and saved!";
+        }
     }
 
     private void UpdateWindowSizeTextBlock()
     {
-        WindowSizeTextBlock.Text = $"Window Size: {windowSizeX}x{windowSizeY}";
+        WindowSizeTextBlock.Text = $"Window Size: {settings.windowSizeX}x{settings.windowSizeY}";
     }
 }

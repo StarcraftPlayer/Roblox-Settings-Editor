@@ -112,6 +112,7 @@
                     VerticalContentAlignment="Center"
                     Watermark="Enter FPS value (e.g., 144)"
                     Height="40"
+                    TextChanged="FpsInputTextChanged"
                     HorizontalContentAlignment="Center"/>
                 </StackPanel>
 
