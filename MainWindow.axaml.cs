@@ -3,19 +3,29 @@ using Avalonia.Media;
 using System.IO;
 using System;
 using Avalonia.Platform.Storage;
+using System.Xml;
+using System.Threading.Tasks;
 
 namespace Roblox_Settings_Modifier;
 
 public partial class MainWindow : Window
 {
     AppSettings settings = new AppSettings();
-    const int minWindowSizeX = 640;
-    const int minWindowSizeY = 360;
+    const int minWindowSizeX = 816; // 640;
+    const int minWindowSizeY = 638; // 360;
     string selectableFilePath = "C:\\Users\\[Your User]\\AppData\\Local\\Roblox\\GlobalBasicSettings_13.xml";
 
     public MainWindow()
     {
         InitializeComponent();
+
+        HeaderPanel.PointerPressed += (s, e) =>
+{
+    if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+    {
+        (VisualRoot as Window)!.BeginMoveDrag(e);
+    }
+};
 
         if (OperatingSystem.IsWindows())
         {
@@ -60,8 +70,58 @@ public partial class MainWindow : Window
                 FullScreenButton.Background = Brushes.SlateGray;
             }
             StatusMessage.Text = "Settings loaded successfully!";
+
+
+            if (!string.IsNullOrEmpty(settings.FilePath) && File.Exists(settings.FilePath))
+            {
+                StartFileWatcher(settings.FilePath); // Add this
+            }
         }
     }
+
+    private FileSystemWatcher? fileWatcher;
+    private bool isApplyingSettings = false; // Add this flag
+
+    private void StartFileWatcher(string filePath)
+    {
+        fileWatcher?.Dispose();
+
+        try
+        {
+            var directory = Path.GetDirectoryName(filePath);
+            var fileName = Path.GetFileName(filePath);
+
+            if (string.IsNullOrEmpty(directory) || string.IsNullOrEmpty(fileName))
+                return;
+
+            fileWatcher = new FileSystemWatcher(directory)
+            {
+                Filter = fileName,
+                NotifyFilter = NotifyFilters.LastWrite
+            };
+
+            fileWatcher.Changed += async (s, e) =>
+            {
+                // IGNORE if we're the ones writing
+                if (isApplyingSettings) return;
+
+                await Task.Delay(500);
+
+                // Double-check we're not writing
+                if (isApplyingSettings) return;
+
+                Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                {
+                    ApplySettings();
+                    StatusMessage.Text = "File changed - settings reapplied!";
+                });
+            };
+
+            fileWatcher.EnableRaisingEvents = true;
+        }
+        catch { }
+    }
+
     private bool ApplySettings()
     {
         // Validate file path
@@ -83,7 +143,59 @@ public partial class MainWindow : Window
             StatusMessage.Text = "Invalid FPS value!";
             return false;
         }
-        return true;
+
+        XmlDocument xmlDoc = new XmlDocument();
+        try
+        {
+            isApplyingSettings = true; // SET FLAG BEFORE WRITING
+            xmlDoc.Load(FilePathTextBox.Text);
+
+            // Get the Properties node
+            XmlNode? propertiesNode = xmlDoc.SelectSingleNode("//Item[@class='UserGameSettings']/Properties");
+
+            if (propertiesNode == null)
+            {
+                StatusMessage.Text = "Invalid Roblox settings file!";
+                return false;
+            }
+
+            // Helper function to update a node
+            void UpdateNode(string xpath, string value, XmlNode? parentNode = null)
+            {
+                XmlNode? node = (parentNode ?? propertiesNode).SelectSingleNode(xpath);
+                if (node != null)
+                {
+                    node.InnerText = value;
+                }
+            }
+
+            // Update all settings
+            UpdateNode("int[@name='FramerateCap']", settings.FPS.ToString());
+            UpdateNode("int[@name='GraphicsQualityLevel']", settings.GraphicsLevel.ToString());
+            UpdateNode("float[@name='MasterVolume']", (settings.VolumeLevel / 10.0f).ToString("0.000000000"));
+            UpdateNode("bool[@name='Fullscreen']", settings.Fullscreen.ToString().ToLower());
+
+            // Window size (uses parent parameter)
+            XmlNode? windowSizeNode = propertiesNode.SelectSingleNode("Vector2[@name='StartScreenSize']");
+            if (windowSizeNode != null)
+            {
+                UpdateNode("X", settings.windowSizeX.ToString(), windowSizeNode);
+                UpdateNode("Y", settings.windowSizeY.ToString(), windowSizeNode);
+            }
+
+            // Save
+            xmlDoc.Save(FilePathTextBox.Text);
+            // Wait a bit before clearing flag
+            Task.Delay(1000).ContinueWith(_ => isApplyingSettings = false);
+            StatusMessage.Text = "Settings applied successfully!";
+            return true;
+        }
+        catch (Exception ex)
+        {
+            isApplyingSettings = false; // Clear flag on error
+            StatusMessage.Text = $"Error: {ex.Message}";
+            return false;
+        }
     }
 
     public void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -125,6 +237,7 @@ public partial class MainWindow : Window
             var filePath = files[0].Path.LocalPath;
             settings.FilePath = filePath;
             FilePathTextBox.Text = settings.FilePath;
+            StartFileWatcher(filePath); // Add this line
         }
     }
 

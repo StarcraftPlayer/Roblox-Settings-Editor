@@ -18,58 +18,60 @@
 
             <StackPanel Margin="16" Spacing="8">
                 <!-- Header -->
-                <StackPanel Spacing="4" Margin="0, 0, 0, 16">
-                    <Grid ColumnSpacing="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
-                        Grid.Column="0"
-                        Text="RBLX Settings Editor"
-                        Foreground="{StaticResource PrimaryBrush}"
-                        FontSize="20"
-                        FontWeight="Bold"/>
-                        <Button Grid.Column="1" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="-" Click="MinimizeButton_Click"/>
-                        <Button Grid.Column="2" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="X" Click="CloseButton_Click"/>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
-                        Text="By Ybg"
-                        Foreground="{StaticResource SecondaryBrush}"
-                        FontSize="14"
-                        FontWeight="Bold"
-                        Grid.Column="0"
-                        Margin="0, 0, 0, 16"/>
-                        <HyperlinkButton
-                        Grid.Column="1"
-                        NavigateUri="https://github.com/StarcraftPlayer/Roblox-Settings-Modifier">
+                <Border Padding="8" Background="{StaticResource BackgroundAccent}" CornerRadius="8">
+                    <StackPanel x:Name="HeaderPanel" Spacing="4">
+                        <Grid ColumnSpacing="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                            Grid.Column="0"
+                            Text="RBLX Settings Editor"
+                            Foreground="{StaticResource PrimaryBrush}"
+                            FontSize="18"
+                            FontWeight="Bold"/>
+                            <Button Grid.Column="1" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="-" Click="MinimizeButton_Click"/>
+                            <Button Grid.Column="2" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="X" Click="CloseButton_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                            Text="By Ybg"
+                            Foreground="{StaticResource SecondaryBrush}"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Grid.Column="0"
+                            Margin="0, 0, 0, 16"/>
+                            <HyperlinkButton
+                            Grid.Column="1"
+                            NavigateUri="https://github.com/StarcraftPlayer/Roblox-Settings-Modifier">
 
-                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                <Image
-                                Width="16"
-                                Height="16"
-                                Source="avares://Roblox-Settings-Modifier/Assets/Icons/GitHub_Invertocat_Black.png" />
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Image
+                                    Width="16"
+                                    Height="16"
+                                    Source="avares://Roblox-Settings-Modifier/Assets/Icons/GitHub_Invertocat_Black.png" />
 
-                                <TextBlock Text="GitHub" />
-                            </StackPanel>
+                                    <TextBlock Text="GitHub" />
+                                </StackPanel>
 
-                        </HyperlinkButton>
+                            </HyperlinkButton>
 
-                    </Grid>
-                    <SelectableTextBlock
-                    x:Name="FilePathSelectableTextBox"
-                    Foreground="{StaticResource TertiaryBrush}"
-                    TextWrapping="Wrap"
-                    Opacity="0.7"
-                    Text="You can find your settings file at C:\Users\[Your User]\AppData\Local\Roblox\GlobalBasicSettings_13.xml"/>
-                    <Button Content="Copy Path" Click="CopyPathButton_Click"/>
-                </StackPanel>
+                        </Grid>
+                        <SelectableTextBlock
+                        x:Name="FilePathSelectableTextBox"
+                        Foreground="{StaticResource TertiaryBrush}"
+                        TextWrapping="Wrap"
+                        Opacity="0.7"
+                        Text="You can find your settings file at C:\Users\[Your User]\AppData\Local\Roblox\GlobalBasicSettings_13.xml"/>
+                        <Button Content="Copy Path" Click="CopyPathButton_Click"/>
+                    </StackPanel>
+                </Border>
 
                 <!-- File Selector -->
                 <StackPanel Spacing="4">
@@ -142,10 +144,10 @@
                     Foreground="{StaticResource TertiaryBrush}"/>
                     <Slider
                     x:Name="VolumeLevelSlider"
-                    Minimum="1"
+                    Minimum="0"
                     Height="40"
-                    Maximum="21"
-                    Value="10"
+                    Maximum="10"
+                    Value="3"
                     ValueChanged="VolumeLevelSlider_ValueChanged"/>
                 </StackPanel>
 
