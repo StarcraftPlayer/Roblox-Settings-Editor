@@ -1,0 +1,28 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Avalonia designer
+*.avalonia/
+
+# NuGet packages (optional - some people commit this)
+packages/
+*.nupkg
+
+# Publish outputs
+publish/
