@@ -150,8 +150,8 @@
                 </StackPanel>
 
                 <!-- Fullscreen -->
-                <Button
-                Content="Fullscreen: Off" Click="ChangeFullScreen" Background="SlateGray"/>
+                <Button x:Name="FullScreenButton"
+                        Content="Fullscreen: Off" Click="ChangeFullScreen" Background="SlateGray"/>
 
                 <!-- Window Size -->
                 <StackPanel Spacing="4">

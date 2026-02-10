@@ -4,6 +4,7 @@ using System.Text.Json;
 
 public class AppSettings
 {
+    public string FilePath { get; set; } = "";
     public int FPS { get; set; } = 60;
     public int GraphicsLevel { get; set; } = 10;
     public int VolumeLevel { get; set; } = 10;
@@ -21,11 +22,11 @@ public class AppSettings
 
     public bool SaveSettings()
     {
-        string filePath = getSaveFilePath();
+        string saveFilePath = getSaveFilePath();
         try
         {
             string jsonString = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(filePath, jsonString);
+            File.WriteAllText(saveFilePath, jsonString);
             return true;
         }
         catch (Exception ex)
@@ -37,18 +38,19 @@ public class AppSettings
 
     public bool LoadSettings()
     {
-        string filePath = getSaveFilePath();
-        if (!File.Exists(filePath))
+        string saveFilePath = getSaveFilePath();
+        if (!File.Exists(saveFilePath))
         {
             return false;
         }
 
         try
         {
-            string jsonString = File.ReadAllText(filePath);
+            string jsonString = File.ReadAllText(saveFilePath);
             var loadedSettings = JsonSerializer.Deserialize<AppSettings>(jsonString);
             if (loadedSettings != null)
             {
+                this.FilePath = loadedSettings.FilePath;
                 this.FPS = loadedSettings.FPS;
                 this.GraphicsLevel = loadedSettings.GraphicsLevel;
                 this.VolumeLevel = loadedSettings.VolumeLevel;

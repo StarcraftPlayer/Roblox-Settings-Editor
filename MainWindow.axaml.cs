@@ -15,8 +15,8 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        settings.LoadSettings();
         InitializeComponent();
+
         if (OperatingSystem.IsWindows())
         {
             var robloxSettingsPath = Path.Combine(
@@ -40,6 +40,27 @@ public partial class MainWindow : Window
         WindowSizeYSlider.Minimum = minWindowSizeY;
         WindowSizeXSlider.Maximum = Screens.Primary.Bounds.Width;
         WindowSizeYSlider.Maximum = Screens.Primary.Bounds.Height;
+
+        if (settings.LoadSettings())
+        {
+            FpsInput.Text = settings.FPS.ToString();
+            FilePathTextBox.Text = settings.FilePath;
+            GraphicsLevelSlider.Value = settings.GraphicsLevel;
+            VolumeLevelSlider.Value = settings.VolumeLevel;
+            WindowSizeXSlider.Value = settings.windowSizeX;
+            WindowSizeYSlider.Value = settings.windowSizeY;
+            if (settings.Fullscreen)
+            {
+                FullScreenButton.Content = "Fullscreen: On";
+                FullScreenButton.Background = Brushes.SeaGreen;
+            }
+            else
+            {
+                FullScreenButton.Content = "Fullscreen: Off";
+                FullScreenButton.Background = Brushes.SlateGray;
+            }
+            StatusMessage.Text = "Settings loaded successfully!";
+        }
     }
     private bool ApplySettings()
     {
@@ -62,7 +83,7 @@ public partial class MainWindow : Window
             StatusMessage.Text = "Invalid FPS value!";
             return false;
         }
-        return false;
+        return true;
     }
 
     public void MinimizeButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -102,7 +123,8 @@ public partial class MainWindow : Window
         if (files.Count > 0)
         {
             var filePath = files[0].Path.LocalPath;
-            FilePathTextBox.Text = filePath;
+            settings.FilePath = filePath;
+            FilePathTextBox.Text = settings.FilePath;
         }
     }
 
