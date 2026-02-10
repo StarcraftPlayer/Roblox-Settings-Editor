@@ -1,10 +1,38 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Roblox_Settings_Modifier.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+             RequestedThemeVariant="Light">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryBrush">hsl(6, 75%, 50%)</SolidColorBrush>
+        <SolidColorBrush x:Key="SecondaryBrush">hsl(6, 75%, 55%)</SolidColorBrush>
+        <SolidColorBrush x:Key="TertiaryBrush">hsl(6, 75%, 60%)</SolidColorBrush>
+        <SolidColorBrush x:Key="BackgroundAccent">hsl(6, 75%, 95%)</SolidColorBrush>
+        <SolidColorBrush x:Key="Background">hsl(9, 75%, 97.5%)</SolidColorBrush>
+    </Application.Resources>
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme/>
+        <Style Selector="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource Background}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+            <Setter Property="Background" Value="SlateGray"/>
+            <Setter Property="Margin" Value="0, -12, 0, 4"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="TickFrequency" Value="1"/>
+            <Style Selector="^ /template/ Thumb">
+                <Setter Property="Background" Value="Green"/>
+            </Style>
+        </Style>
+
     </Application.Styles>
 </Application>
