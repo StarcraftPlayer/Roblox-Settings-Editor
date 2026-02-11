@@ -10,6 +10,10 @@ And when you try to join back on another main account, it'll inherit those setti
 What this program does is enforces the settings YOU WANT, not what you last put into Roblox.
 If Roblox tries to change any settings in the xml file, this will override any changes to variables that you yourself set.
 
+CURRENTLY THE OVERRIDE SETTINGS FEATURE IS BROKEN
+
+![Photo of the app.](Assets/ReadMePhotos/Main.png)
+
 ## Installation
 
 Pending
