@@ -13,3 +13,12 @@ If Roblox tries to change any settings in the xml file, this will override any c
 ## Installation
 
 Pending
+
+## How to Build
+
+dotnet publish ./Roblox-Settings-Modifier.csproj \
+ -c Release \
+ -r win-x64 \
+ --self-contained true \
+ -p:PublishSingleFile=true \
+ -p:IncludeNativeLibrariesForSelfExtract=true

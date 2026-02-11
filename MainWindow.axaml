@@ -35,20 +35,24 @@
                             <Button Grid.Column="1" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="-" Click="MinimizeButton_Click"/>
                             <Button Grid.Column="2" Width="24" Height="24" Padding="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="X" Click="CloseButton_Click"/>
                         </Grid>
-                        <Grid>
+                        <Grid ColumnSpacing="4">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}" Width="26" Height="26">
+                                <Image Source="avares://Roblox-Settings-Modifier/Assets/Icons/App_Icon.ico" Width="24" Height="24"/>
+                            </Border>
                             <TextBlock
                             Text="By Ybg"
                             Foreground="{StaticResource SecondaryBrush}"
                             FontSize="14"
                             FontWeight="Bold"
-                            Grid.Column="0"
+                            Grid.Column="1"
                             Margin="0, 0, 0, 16"/>
                             <HyperlinkButton
-                            Grid.Column="1"
+                            Grid.Column="2"
                             NavigateUri="https://github.com/StarcraftPlayer/Roblox-Settings-Modifier">
 
                                 <StackPanel Orientation="Horizontal" Spacing="6">
