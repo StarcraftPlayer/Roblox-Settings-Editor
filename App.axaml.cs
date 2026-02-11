@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace Roblox_Settings_Modifier;
+namespace Roblox_Settings_Editor;
 
 public partial class App : Application
 {

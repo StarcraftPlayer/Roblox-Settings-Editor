@@ -16,13 +16,8 @@ CURRENTLY THE OVERRIDE SETTINGS FEATURE IS BROKEN
 
 ## Installation
 
-Pending
+Just install and run, everything is contained in one .exe file.
 
 ## How to Build
 
-dotnet publish ./Roblox-Settings-Modifier.csproj \
- -c Release \
- -r win-x64 \
- --self-contained true \
- -p:PublishSingleFile=true \
- -p:IncludeNativeLibrariesForSelfExtract=true
+dotnet publish "./Roblox Settings Editor.csproj" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true

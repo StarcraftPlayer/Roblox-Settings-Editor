@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace Roblox_Settings_Modifier;
+namespace Roblox_Settings_Editor;
 
 class Program
 {

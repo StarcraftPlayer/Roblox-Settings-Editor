@@ -6,7 +6,7 @@ using Avalonia.Platform.Storage;
 using System.Xml;
 using System.Threading.Tasks;
 
-namespace Roblox_Settings_Modifier;
+namespace Roblox_Settings_Editor;
 
 public partial class MainWindow : Window
 {

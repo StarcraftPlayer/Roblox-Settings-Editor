@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roblox-Settings-Modifier", "Roblox-Settings-Modifier.csproj", "{B76B64CE-F061-8946-5E17-18AA576BAAF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roblox Settings Editor", "Roblox Settings Editor.csproj", "{B76B64CE-F061-8946-5E17-18AA576BAAF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
