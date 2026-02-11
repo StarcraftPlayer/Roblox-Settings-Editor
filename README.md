@@ -1,4 +1,4 @@
-# Roblox Settings Modifier
+# Roblox Settings Editor
 
 A _WINDOWS-ONLY_ app I made for editing certain Roblox settings, and enforcing those settings.
 This is especially useful for games like Rogue Lineage, where most people use a lot of alt accounts.
