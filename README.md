@@ -23,6 +23,10 @@ If Roblox tries to change any settings in the xml file, this will override any c
 
 Just install the .zip, extract, and throw the .exe into your desktop folder and hit run. Everything is contained within the .exe.
 
+Windows will flag it as unsafe but it's not. If you want to check the code, the actual meat is in MainWindow.axaml.cs.
+In no way does this program tamper with non-Roblox related files or edit the Roblox binary or runtime.
+This only edits the settings file without you having to open up roblox yourself.
+
 ## How to Build
 
 dotnet publish "./Roblox Settings Editor.csproj" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
