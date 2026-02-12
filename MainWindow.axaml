@@ -25,6 +25,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock
                             Grid.Column="0"
@@ -38,30 +39,30 @@
                         <Grid ColumnSpacing="4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}" Width="26" Height="26">
                                 <Image Source="avares://Roblox Settings Editor/Assets/Icons/App_Icon.ico" Width="24" Height="24"/>
                             </Border>
-                            <TextBlock
-                            Text="By Ybg"
-                            Foreground="{StaticResource SecondaryBrush}"
-                            FontSize="14"
-                            FontWeight="Bold"
-                            Grid.Column="1"
-                            Margin="0, 0, 0, 16"/>
                             <HyperlinkButton
+                            Grid.Column="1"
+                            Content="Check For Updates..."
+                            Background="{StaticResource SecondaryBrush}"
+                            Foreground="{StaticResource Background}"
+                            x:Name="UpdateStatusTextBlock"
+                            />
+                            <HyperlinkButton
+                            Background="{StaticResource SecondaryBrush}"
                             Grid.Column="2"
                             NavigateUri="https://github.com/StarcraftPlayer/Roblox-Settings-Editor/">
-
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <Image
                                     Width="16"
                                     Height="16"
                                     Source="avares://Roblox Settings Editor/Assets/Icons/GitHub_Invertocat_Black.png" />
 
-                                    <TextBlock Text="GitHub" />
+                                    <TextBlock Foreground="{StaticResource Background}" Text="GitHub" />
                                 </StackPanel>
 
                             </HyperlinkButton>

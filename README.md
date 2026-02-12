@@ -37,5 +37,5 @@ In no way does this program tamper with non-Roblox related files or edit the Rob
 ## How to Build
 
 ```bash
-dotnet publish "./Roblox Settings Editor.csproj" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 ```

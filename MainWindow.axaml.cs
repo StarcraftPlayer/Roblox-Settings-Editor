@@ -15,9 +15,28 @@ public partial class MainWindow : Window
     const int minWindowSizeY = 638; // 360;
     string selectableFilePath = "C:\\Users\\[Your User]\\AppData\\Local\\Roblox\\GlobalBasicSettings_13.xml";
 
+    private async void CheckForUpdates()
+    {
+        var (hasUpdate, latestVersion, downloadUrl) = await AppVersion.CanUpdate();
+        if (hasUpdate)
+        {
+            UpdateStatusTextBlock.Content = $"Download v{latestVersion}";
+            UpdateStatusTextBlock.Foreground = Brushes.White;
+            UpdateStatusTextBlock.Background = Brushes.SeaGreen;
+            UpdateStatusTextBlock.NavigateUri = new Uri(downloadUrl);
+        }
+        else
+        {
+            UpdateStatusTextBlock.Content = "No New Updates";
+        }
+
+    }
+
     public MainWindow()
     {
         InitializeComponent();
+
+        CheckForUpdates();
 
         HeaderPanel.PointerPressed += (s, e) =>
 {
