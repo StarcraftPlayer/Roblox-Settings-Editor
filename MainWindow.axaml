@@ -152,7 +152,7 @@
                     Minimum="0"
                     Height="40"
                     Maximum="10"
-                    Value="3"
+                    Value="10"
                     ValueChanged="VolumeLevelSlider_ValueChanged"/>
                 </StackPanel>
 
